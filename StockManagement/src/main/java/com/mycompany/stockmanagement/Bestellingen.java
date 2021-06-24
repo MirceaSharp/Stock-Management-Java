@@ -5,6 +5,15 @@
  */
 package com.mycompany.stockmanagement;
 
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import static org.apache.commons.math3.fitting.leastsquares.LeastSquaresFactory.model;
+
 /**
  *
  * @author mirce
@@ -27,31 +36,164 @@ public class Bestellingen extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
+        btnBestellingVerwijderen = new javax.swing.JButton();
+        btnBestellingenTonen = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        DataGrid2 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jLabel1.setText("jLabel1");
+        btnBestellingVerwijderen.setBackground(new java.awt.Color(51, 153, 0));
+        btnBestellingVerwijderen.setText("Bestelling Verwijderen");
+        btnBestellingVerwijderen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBestellingVerwijderenActionPerformed(evt);
+            }
+        });
+
+        btnBestellingenTonen.setBackground(new java.awt.Color(51, 153, 0));
+        btnBestellingenTonen.setText("Bestellingen Tonen");
+        btnBestellingenTonen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBestellingenTonenActionPerformed(evt);
+            }
+        });
+
+        DataGrid2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "", "", "", ""
+            }
+        ));
+        jScrollPane1.setViewportView(DataGrid2);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jLabel1)
-                .addContainerGap(653, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnBestellingVerwijderen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnBestellingenTonen, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 106, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(37, 37, 37)
-                .addComponent(jLabel1)
-                .addContainerGap(403, Short.MAX_VALUE))
+                .addGap(35, 35, 35)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBestellingenTonen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnBestellingVerwijderen)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btnBestellingVerwijderenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBestellingVerwijderenActionPerformed
+       
+                   int row = DataGrid2.getSelectedRow();
+          int column = DataGrid2.getSelectedColumn();
+          if(DataGrid2.getSelectedRowCount()== 0){
+              JOptionPane.showMessageDialog(rootPane, "Please select a row!");
+          
+          }
+          else
+          {
+              
+        try {
+          Connection con = null;
+         Class.forName("com.mysql.cj.jdbc.Driver");
+           
+      String userName = "root";
+               String password = "Sanuuit126#";
+               String url = "jdbc:mysql://localhost:3306/stock_management_database";
+      
+         con = DriverManager.getConnection(url, userName, password);
+         
+        try {
+         
+  
+           
+          
+            String sql = "DELETE FROM Bestellingen WHERE BestellingID ="+DataGrid2.getValueAt(row, column)+"";
+            PreparedStatement ps = con.prepareStatement(sql);
+        
+            ps.executeUpdate(sql);
+            JOptionPane.showMessageDialog(null, "Congratulations !!");
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null,  e.getMessage());
+        }
+       
+            
+      
+      con.close();
+    }
+    catch (Exception e)
+    {
+      System.err.println("Got an exception! ");
+      System.err.println(e.getMessage());
+    }
+      
+          }
+        
+        
+    }//GEN-LAST:event_btnBestellingVerwijderenActionPerformed
+
+    private void btnBestellingenTonenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBestellingenTonenActionPerformed
+      DataGrid2.setModel(new javax.swing.table.DefaultTableModel(
+    new Object [][] {
+
+    },
+    new String [] {
+        "BestellingID", "DatumOpgemaakt", "Klant ID"
+    }
+));
+        
+        try {
+          Connection con = null;
+         Class.forName("com.mysql.cj.jdbc.Driver");
+           
+      String userName = "root";
+               String password = "Sanuuit126#";
+               String url = "jdbc:mysql://localhost:3306/stock_management_database";
+      
+         con = DriverManager.getConnection(url, userName, password);
+        String query = "SELECT * FROM bestellingen";
+         Statement st = con.createStatement();
+           ResultSet rs = st.executeQuery(query);
+            while (rs.next())
+      {
+        String ID = rs.getString("BestellingID");
+        String datumOpgemaakt = rs.getString("DatumOpgemaakt");
+        String KlantID = rs.getString("KlantID");
+        JOptionPane.showMessageDialog(rootPane, "ID:" + ID   + "\n" + "datumOpgemaakt:" +datumOpgemaakt + "\n" + "KlantID:" + KlantID);
+      String[]tbData = {ID,datumOpgemaakt,KlantID};
+      DefaultTableModel tblModel = (DefaultTableModel)DataGrid2.getModel();
+      tblModel.addRow(tbData);
+        }
+            
+      st.close();
+      con.close();
+    }
+    catch (Exception e)
+    {
+      System.err.println("Got an exception! ");
+      System.err.println(e.getMessage());
+    }
+      
+                                                    
+    }//GEN-LAST:event_btnBestellingenTonenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -89,6 +231,9 @@ public class Bestellingen extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JTable DataGrid2;
+    private javax.swing.JButton btnBestellingVerwijderen;
+    private javax.swing.JButton btnBestellingenTonen;
+    private javax.swing.JScrollPane jScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

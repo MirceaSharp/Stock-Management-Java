@@ -61,6 +61,7 @@ public class Home extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         btnProducten = new javax.swing.JButton();
         btnLeveranciers = new javax.swing.JButton();
+        btnDatabeheer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Overzicht");
@@ -178,6 +179,14 @@ public class Home extends javax.swing.JFrame {
             }
         });
 
+        btnDatabeheer.setBackground(new java.awt.Color(51, 153, 0));
+        btnDatabeheer.setText("Databeheer");
+        btnDatabeheer.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnDatabeheerActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -191,7 +200,8 @@ public class Home extends javax.swing.JFrame {
                     .addComponent(btnKlanten, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnGenerateReport, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnProducten, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnLeveranciers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnLeveranciers, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnDatabeheer, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 868, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 10, Short.MAX_VALUE))
@@ -214,9 +224,11 @@ public class Home extends javax.swing.JFrame {
                         .addComponent(btnLeveranciers)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnGenerateReport, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(9, 9, 9)
+                        .addComponent(btnDatabeheer)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(73, Short.MAX_VALUE))
+                        .addContainerGap(53, Short.MAX_VALUE))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
         );
 
@@ -471,6 +483,11 @@ else
                                             
     }//GEN-LAST:event_btnLeveranciersActionPerformed
 
+    private void btnDatabeheerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDatabeheerActionPerformed
+        Databeheer databeheer = new Databeheer();
+        databeheer.show();
+    }//GEN-LAST:event_btnDatabeheerActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -489,6 +506,7 @@ else
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable DataGrid;
     private javax.swing.JButton btnBestellingen;
+    private javax.swing.JButton btnDatabeheer;
     private javax.swing.JButton btnGenerateReport;
     private javax.swing.JButton btnKlanten;
     private javax.swing.JButton btnLeveranciers;
